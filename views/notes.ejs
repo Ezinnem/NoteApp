@@ -25,19 +25,22 @@
         </tr>
       </thead>
       <tbody>
-        <% for( let i = 0; i < note.length; i++){ %>
-        <tr id="<%= myTr[i] %>">
-          <th scope="row"><%= i + 1 %></th>
-          <td><%= note[i] %></td>
-          <td>
-            <button id="<%= i+1 %>" type="button" onclick="editNote('<%= i+1 %>', '<%= note %>')" class="btn btn-secondary" name= "deleteNote">Edit</button>
-            
-            <form action="/deleteNote" method="POST">
-            <button id="<%= i+1 %>" type="submit" name="deleteNote" class="btn btn-danger">Delete</button>
-            </form>
-          </td>
+        <% note.map((i, index) => { %>
+<tr>
+  <th scope="row"><%= index+1 %></th>
+        <td><%= i.body %></td>
+        <td>
+          <button id="<%= i  %>" type="button" onclick="editNote('<%= i %>', '<%= note %>')"
+            class="btn btn-secondary" name="deleteNote">Edit</button>
+
+          <form action='<%= /deleteNote/ +i.id%>' method="POST">
+            <button id="<%= i+1 %>" type="submit" class="btn btn-danger">Delete</button>
+          </form>
+        </td>
         </tr>
-        <% } %>
+        <% }) %>
+
+
       </tbody>
     </table>
 

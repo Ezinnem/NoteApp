@@ -9,6 +9,7 @@ let app = express();
 app.use(bodyParser.urlencoded({
   extended: true
 }));
+app.use(express.static('public'));
 //we installed the ejs and created a file inside the views
 app.set('view engine', 'ejs');
 
@@ -22,15 +23,24 @@ app.get('/', function (req, res) {
 //then, we use app.post option.
 app.post("/addNotes", function (req, res) {
 
-  let newNotes = ["Author: " +
-    req.body.newName + " " + " Note: " + req.body.newNote
-  ];
+  let newNotes = [ req.body.newNote ];
   //add the new Note from the post route into the array of notes
   note.push(newNotes);
 
   //then we redirect it to the root route
   res.redirect('/');
 });
+
+app.post("/deleteNote", function(req, res){
+  let tableName = document.getElementById("myTr[i]");
+  for (var i=0; i < tableName.length; i++){
+    if (tableName[i] < 0){
+      tableName.splice(i, 1);
+    }
+    return;
+  }
+    res.redirect('/');
+    });
 
 
 //then we set our server port. This should always be at bottom.

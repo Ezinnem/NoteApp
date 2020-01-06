@@ -11,35 +11,42 @@
       <h2>Note App</h2>
       <form action="/addNotes" method="POST">
         <div class="form-group">
-          <input type="text" name="newName" class="form-control" placeholder="Full Name">
-        </div>
-        <div class="form-group">
           <textarea class="form-control" type="text" name="newNote" placeholder="Add new Note"></textarea>
           <button class="btn btn-success" type="submit">Add Note</button>
         </div>
-        <div class="form-group">
-
-
-          <h2>Added Notes</h2>
-
-
-          <% for( var i = 0; i < note.length; i++){ %>
-
-
-          <li><input type="checkbox" name="check" value="<%= note[i] %>" /> <%= note[i] %> </li>
-          <% } %>
-
-
-        </div>
     </div>
     </form>
-
+    <table class="table">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">NOTES</th>
+          <th scope="col">ACTIONS</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% for( let i = 0; i < note.length; i++){ %>
+        <tr id="<%= myTr[i] %>">
+          <th scope="row"><%= i + 1 %></th>
+          <td><%= note[i] %></td>
+          <td>
+            <button id="<%= i+1 %>" type="button" onclick="editNote('<%= i+1 %>', '<%= note %>')" class="btn btn-secondary" name= "deleteNote">Edit</button>
+            
+            <form action="/deleteNote" method="POST">
+            <button id="<%= i+1 %>" type="submit" name="deleteNote" class="btn btn-danger">Delete</button>
+            </form>
+          </td>
+        </tr>
+        <% } %>
+      </tbody>
+    </table>
 
     <div class="footer">
       <p>Copyright &copy 2019 ZinnyCodes</p>
     </div>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="js/eventsHandler.js"></script>
 </body>
 
 

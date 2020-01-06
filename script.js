@@ -1,7 +1,7 @@
 //Declear the installed modules express and body-parser.
 let express = require('express');
 let bodyParser = require('body-parser');
-let note = ['We have a text', 'This is a sceond text'];
+let note = [{id: 1, body: 'We have a text'}, {id: 2, body: 'This is a second text'}];
 
 
 //call the express and Body-parser
@@ -22,24 +22,24 @@ app.get('/', function (req, res) {
 
 //then, we use app.post option.
 app.post("/addNotes", function (req, res) {
-
-  let newNotes = [ req.body.newNote ];
-  //add the new Note from the post route into the array of notes
-  note.push(newNotes);
+  //assigning Note id to the notes using math.random
+const userNote = {};
+userNote.id = Math.random() * 100;
+userNote.body = req.body.newNote 
+ 
+  note.push(userNote);
 
   //then we redirect it to the root route
   res.redirect('/');
 });
 
-app.post("/deleteNote", function(req, res){
-  let tableName = document.getElementById("myTr[i]");
-  for (var i=0; i < tableName.length; i++){
-    if (tableName[i] < 0){
-      tableName.splice(i, 1);
-    }
-    return;
-  }
-    res.redirect('/');
+//Handling the delete request
+
+app.post('/deleteNote/:id', function(req, res){
+  console.log(req.params.id);
+  const deleteNotes = note.filter(item => item.id != req.params.id);
+note = deleteNotes;
+  return res.redirect('/');
     });
 
 

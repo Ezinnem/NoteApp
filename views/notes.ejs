@@ -11,35 +11,47 @@
       <h2>Note App</h2>
       <form action="/addNotes" method="POST">
         <div class="form-group">
-          <input type="text" name="newName" class="form-control" placeholder="Full Name">
-        </div>
-        <div class="form-group">
-          <textarea class="form-control" type="text" name="newNote" placeholder="Add new Note"></textarea>
+          <textarea class="form-control" type="text" name="newNote" id="newNote" placeholder="Add new Note"></textarea>
           <button class="btn btn-success" type="submit">Add Note</button>
-        </div>
-        <div class="form-group">
-
-
-          <h2>Added Notes</h2>
-
-
-          <% for( var i = 0; i < note.length; i++){ %>
-
-
-          <li><input type="checkbox" name="check" value="<%= note[i] %>" /> <%= note[i] %> </li>
-          <% } %>
-
-
         </div>
     </div>
     </form>
+    <table class="table">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">NOTES</th>
+          <th scope="col">ACTIONS</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% note.map((i, index) => { %>
+<tr>
+  <th scope="row"><%= index+1 %></th>
+        <td><%= i.body %></td>
+        <td>
+          <form action="<%= /editNote/ + i.id%>" method="POST" id="<%= 'form' + i.id%>">
+       <button type="submit" 
+            class="btn btn-secondary">Edit</button>
+            </form>
 
+          <form action='<%= /deleteNote/ +i.id%>' method="POST">
+            <button type="submit" class="btn btn-danger">Delete</button>
+          </form>
+        </td>
+        </tr>
+        <% }) %>
+
+
+      </tbody>
+    </table>
 
     <div class="footer">
       <p>Copyright &copy 2019 ZinnyCodes</p>
     </div>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="js/eventsHandler.js"></script>
 </body>
 
 

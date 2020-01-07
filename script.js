@@ -32,6 +32,15 @@ userNote.body = req.body.newNote
   //then we redirect it to the root route
   res.redirect('/');
 });
+//Handling the edit request
+app.post('/editNote/:id', function(req, res){
+console.log(req.params.id);
+console.log(note);
+  const editNotes = note.(item => item.id = req.params.id);
+  note = editNotes;
+
+res.redirect('/');
+});
 
 //Handling the delete request
 

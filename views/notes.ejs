@@ -11,7 +11,7 @@
       <h2>Note App</h2>
       <form action="/addNotes" method="POST">
         <div class="form-group">
-          <textarea class="form-control" type="text" name="newNote" placeholder="Add new Note"></textarea>
+          <textarea class="form-control" type="text" name="newNote" id="newNote" placeholder="Add new Note"></textarea>
           <button class="btn btn-success" type="submit">Add Note</button>
         </div>
     </div>
@@ -30,11 +30,13 @@
   <th scope="row"><%= index+1 %></th>
         <td><%= i.body %></td>
         <td>
-          <button id="<%= i  %>" type="button" onclick="editNote('<%= i %>', '<%= note %>')"
-            class="btn btn-secondary" name="deleteNote">Edit</button>
+          <form action="<%= /editNote/ + i.id%>" method="POST" id="<%= 'form' + i.id%>">
+       <button type="submit" 
+            class="btn btn-secondary">Edit</button>
+            </form>
 
           <form action='<%= /deleteNote/ +i.id%>' method="POST">
-            <button id="<%= i+1 %>" type="submit" class="btn btn-danger">Delete</button>
+            <button type="submit" class="btn btn-danger">Delete</button>
           </form>
         </td>
         </tr>

@@ -36,7 +36,7 @@ app.post("/addNotes", function (req, res) {
 app.post('/editNote/:id', function (req, res) {
   console.log(req.params.id);
   console.log(note);
-  const editNotes = note.(item => item.id = req.params.id);
+  const editNotes = note.item => item.id = req.params.id);
   note = editNotes;
 
   res.redirect('/');

@@ -1,7 +1,9 @@
 //Declear the installed modules express and body-parser.
 let express = require('express');
 let bodyParser = require('body-parser');
+
 let note = [{ id: 1, body: 'We have a text' }, { id: 2, body: 'This is a second text' }];
+
 
 
 //call the express and Body-parser
@@ -23,9 +25,12 @@ app.get('/', function (req, res) {
 //then, we use app.post option.
 app.post("/addNotes", function (req, res) {
   //assigning Note id to the notes using math.random
+
   const userNote = {};
   userNote.id = Math.random() * 100;
   userNote.body = req.body.newNote
+
+
 
   note.push(userNote);
 
@@ -33,6 +38,7 @@ app.post("/addNotes", function (req, res) {
   res.redirect('/');
 });
 //Handling the edit request
+
 app.post('/editNote/:id', function (req, res) {
   console.log(req.params.id);
   console.log(note);
@@ -40,6 +46,7 @@ app.post('/editNote/:id', function (req, res) {
   note = editNotes;
 
   res.redirect('/');
+
 });
 
 //Handling the delete request
@@ -50,6 +57,7 @@ app.post('/deleteNote/:id', function (req, res) {
   note = deleteNotes;
   return res.redirect('/');
 });
+
 
 
 //then we set our server port. This should always be at bottom.
